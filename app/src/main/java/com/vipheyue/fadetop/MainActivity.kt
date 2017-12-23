@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
     private var havedStart = false
     var workState = WorkState.REST
-    val workingTime = 1 * 15L
-    private val restTime = 1 * 10L
+    val workingTime = 30 * 60L
+    private val restTime = 5 * 60L
     val vibTime: Long = 300 * 1000L
     lateinit var disposable: Disposable
     lateinit var vib: Vibrator
