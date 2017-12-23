@@ -58,13 +58,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun countDown(count: Long) {
-        val observable = Observable.interval(0, 1, TimeUnit.SECONDS)
+        val observable = Observable.interval(0, 1, TimeUnit.SECONDS)//每秒发射一个数字出来
                 .take(count + 1)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
 //TODO  可以在这儿只做倒计时  直接返回 observable 后面的东西各自处理
 
         observable.subscribe(object : Observer<Long> {
+
+            override fun onSubscribe(disposable: Disposable) {
+                this@MainActivity.disposable = disposable
+            }
+
+            override fun onError(e: Throwable) {
+            }
+
+            override fun onNext(t: Long) {
+                val remainTime = count - t
+                val remainMinute = remainTime / 60
+                val remainSeconds = remainTime % 60
+                tv_time_panel.setText(remainMinute.toString() + ":" + remainSeconds)
+            }
+
             override fun onComplete() {
 
                 when (workState) {
@@ -76,28 +91,12 @@ class MainActivity : AppCompatActivity() {
                     }
                     WorkState.REST -> {
                         workState = WorkState.WORKING
-
-                        tv_tip.setText("工作中 稍后将会提醒你 注意休息")
+                        tv_tip.setText("工作中 稍后将提醒你 注意休息")
                         //TODO 播放开始工作的音乐 通知
                         sendNotify("开始工作了,老铁")
                         countDown(workingTime)
                     }
                 }
-            }
-
-            override fun onSubscribe(disposable: Disposable) {
-                this@MainActivity.disposable = disposable
-            }
-
-            override fun onError(e: Throwable) {
-            }
-
-            override fun onNext(t: Long) {
-
-                val remainTime = count - t
-                val remainMinute = remainTime / 60
-                val remainSeconds = remainTime % 60
-                tv_time_panel.setText(remainMinute.toString() + ":" + remainSeconds)
             }
         })
     }
