@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_pink"
     tools:context="com.vipheyue.fadetop.MainActivity">
 
+    <ImageView
+        android:id="@+id/iv_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/icons_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!--android:background="@drawable/oval_yelllow_bg"-->
-    <Button
+<!--    <Button
         android:id="@+id/btn_action"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -20,7 +31,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tip" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip" />-->
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/btn_action"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:text="启动"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip"
+        rv:rv_backgroundColor="@color/color_work_btn"
+        rv:rv_cornerRadius="90dp" />
 
     <TextView
         android:id="@+id/tv_time_panel"
@@ -31,7 +59,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="30:00"
+        android:text="00:00"
         android:textColor="@android:color/white"
         android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"

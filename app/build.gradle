@@ -24,7 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -35,4 +35,6 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile "org.jetbrains.anko:anko-commons:$anko_version"
     compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
+    compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
 }

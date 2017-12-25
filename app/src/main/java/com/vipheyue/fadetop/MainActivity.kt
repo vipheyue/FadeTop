@@ -11,6 +11,7 @@ import android.os.Vibrator
 import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import android.view.WindowManager
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import io.reactivex.Observable
@@ -22,11 +23,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 
 
+
+
 class MainActivity : AppCompatActivity() {
     private var havedStart = false
     var workState = WorkState.REST
-    val workingTime = 30 * 60L
-    private val restTime = 5 * 60L
     val vibTime: Long = 300 * 1000L
     lateinit var disposable: Disposable
     lateinit var vib: Vibrator
@@ -40,6 +41,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+//取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+
+//需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//设置状态栏颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window.setStatusBarColor(configMainBgColor)
+
+        val delegate = btn_action.getDelegate()
+        delegate.setBackgroundColor(configMainTiggerBgColor)
+
+        constraintlayout.setBackgroundColor(configMainBgColor)
         vib = getSystemService(Service.VIBRATOR_SERVICE) as Vibrator
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -47,14 +60,17 @@ class MainActivity : AppCompatActivity() {
             if (havedStart) {//已经开始了 想停止 转换状态
                 havedStart = false
                 disposable.dispose()
+                tv_time_panel.setText("00:00")
                 btn_action.setText("启动")//目前停止状态 点击启动
             } else {
                 havedStart = true
                 workState = WorkState.WORKING
-                countDown(workingTime)
+                countDown(configWorkingTime)
                 btn_action.setText("停止")//目前启动状态 点击停止
             }
         }
+        iv_setting.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
+
     }
 
     fun countDown(count: Long) {
@@ -94,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                         tv_tip.setText("工作中 稍后将提醒你 注意休息")
                         //TODO 播放开始工作的音乐 通知
                         sendNotify("开始工作了,老铁")
-                        countDown(workingTime)
+                        countDown(configWorkingTime)
                     }
                 }
             }
@@ -106,14 +122,14 @@ class MainActivity : AppCompatActivity() {
         builder.setMessage("你已经努力工作了30分钟了,休息一下吧!")
                 .setNegativeButton("再工作5分钟", { dialog, which ->
                     vib.cancel()
-                    countDown(restTime)//继续工作5分钟
+                    countDown(configRestTime)//继续工作5分钟
                 })
                 .setPositiveButton("立即休息", { dialog, i ->
                     vib.cancel()
                     workState = WorkState.REST
                     tv_tip.setText("休息中 放松菊花人人有责 起来喝杯水吧")
                     //TODO 播放开始休息的音乐 通知
-                    countDown(restTime)
+                    countDown(configRestTime)
                 })
 
         builder.create().show()
