@@ -1,6 +1,8 @@
 package com.vipheyue.fadetop
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.flask.colorpicker.ColorPickerView
@@ -22,8 +24,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        btn_color_pinker.setBackgroundColor(configMainBgColor)
-        btn_color_tigger.setBackgroundColor(configMainTiggerBgColor)
+        val btn_color_pinker_delegate = btn_color_pinker.getDelegate()
+        btn_color_pinker_delegate.setBackgroundColor(configMainBgColor)
+        val btn_color_tigger_delegate = btn_color_tigger.getDelegate()
+        btn_color_tigger_delegate.setBackgroundColor(configMainTiggerBgColor)
+
         tv_worktime.setText((configWorkingTime / 60).toString() + "分钟")
         tv_resttime.setText((configRestTime / 60).toString() + "分钟")
 
@@ -38,7 +43,8 @@ class SettingsActivity : AppCompatActivity() {
                     .setPositiveButton("ok") { dialog, selectedColor, allColors ->
                         toast("设置成功,下次启动 APP 时生效")
                         configMainBgColor = selectedColor
-                        btn_color_pinker.setBackgroundColor(configMainBgColor)
+                        val btn_color_pinker_delegate = btn_color_pinker.getDelegate()
+                        btn_color_pinker_delegate.setBackgroundColor(configMainBgColor)
                     }
                     .setNegativeButton("cancel") { dialog, which -> }
                     .build()
@@ -54,7 +60,8 @@ class SettingsActivity : AppCompatActivity() {
                     .setPositiveButton("ok") { dialog, selectedColor, allColors ->
                         toast("设置成功,下次启动 APP 时生效")
                         configMainTiggerBgColor = selectedColor
-                        btn_color_tigger.setBackgroundColor(configMainTiggerBgColor)
+                        val btn_color_tigger_delegate = btn_color_tigger.getDelegate()
+                        btn_color_tigger_delegate.setBackgroundColor(configMainTiggerBgColor)
                     }
                     .build()
                     .show()
@@ -77,6 +84,16 @@ class SettingsActivity : AppCompatActivity() {
             configRestTime = configRestTime + 1 * 60L
             tv_resttime.setText((configRestTime / 60).toString() + "分钟")
         }
+        btn_feedback.setOnClickListener {
+            try {
+                val url = "mqqwpa://im/chat?chat_type=wpa&uin=337681920"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            } catch (e: Exception) {
+                toast("请直接联系 QQ:337681920")
+            }
+
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
