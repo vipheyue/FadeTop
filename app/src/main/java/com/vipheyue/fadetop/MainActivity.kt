@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
 
 
 
-
+//https://developer.android.com/training/scheduling/alarms.html
 class MainActivity : AppCompatActivity() {
     private var havedStart = false
     var workState = WorkState.REST
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//屏幕常亮
         Logger.addLogAdapter(AndroidLogAdapter())
         initView()
     }
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             if (havedStart) {//已经开始了 想停止 转换状态
                 havedStart = false
                 disposable.dispose()
+                workState = WorkState.REST
                 tv_time_panel.setText("00:00")
                 btn_action.setText("启动")//目前停止状态 点击启动
             } else {
@@ -97,7 +99,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onComplete() {
-
                 when (workState) {
                     WorkState.WORKING -> {
                         //开始一直振动 并弹框 1.继续工作5分钟 2.开始休息
