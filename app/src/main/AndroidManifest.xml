@@ -3,7 +3,11 @@
     package="com.vipheyue.fadetop">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -27,6 +31,12 @@
             android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NavigationTheme"></activity>
+        <receiver android:name=".AlarmReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

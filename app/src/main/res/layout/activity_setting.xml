@@ -91,6 +91,30 @@
             android:text="5分钟" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+
+        <Switch
+            android:id="@+id/sw_everydayRemind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="每日9:30分提醒 " />
+
+        <Switch
+            android:id="@+id/sw_SuperModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            android:text="超级模式" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -124,13 +148,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:textSize="11sp"
             android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
             android:singleLine="true"
             android:text="启动器背景"
             android:textColor="@android:color/white"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -141,7 +165,6 @@
         <com.flyco.roundview.RoundTextView
             android:id="@+id/btn_feedback"
             android:layout_width="0dp"
-            android:textSize="11sp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
@@ -151,6 +174,7 @@
             android:singleLine="true"
             android:text="意见反馈"
             android:textColor="@android:color/white"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

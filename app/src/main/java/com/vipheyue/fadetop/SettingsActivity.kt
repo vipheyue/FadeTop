@@ -31,7 +31,13 @@ class SettingsActivity : AppCompatActivity() {
 
         tv_worktime.setText((configWorkingTime / 60).toString() + "分钟")
         tv_resttime.setText((configRestTime / 60).toString() + "分钟")
-
+        sw_everydayRemind.isChecked=configRemindEveryDay
+        sw_everydayRemind.setOnCheckedChangeListener { buttonView, isChecked -> configRemindEveryDay = isChecked }
+        sw_SuperModel.isChecked=configSuperModel
+        sw_SuperModel.setOnCheckedChangeListener { buttonView, isChecked ->
+            configSuperModel = isChecked
+            toast("超级模式会持续响铃,必须手动点击才会停止")
+        }
         btn_color_pinker.setOnClickListener {
             ColorPickerDialogBuilder
                     .with(this)

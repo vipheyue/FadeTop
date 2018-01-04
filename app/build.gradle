@@ -37,4 +37,5 @@ dependencies {
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    compile 'com.tencent.bugly:crashreport:latest.release'
 }
