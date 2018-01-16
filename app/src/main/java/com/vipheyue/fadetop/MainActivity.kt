@@ -11,7 +11,6 @@ import android.view.KeyEvent
 import android.view.WindowManager
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.tencent.bugly.crashreport.CrashReport
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -62,11 +61,15 @@ class MainActivity : AppCompatActivity() {
                 workState = WorkState.REST
                 tv_time_panel.setText("00:00")
                 btn_action.setText("启动")//目前停止状态 点击启动
+                tv_tip.setText("休息中 健康身体 起来喝杯水吧")
+
             } else {
                 havedStart = true
                 workState = WorkState.WORKING
                 countDown(configWorkingTime)
                 btn_action.setText("停止")//目前启动状态 点击停止
+                tv_tip.setText("工作中 稍后将提醒你 注意休息")
+
             }
         }
         iv_setting.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
@@ -140,6 +143,7 @@ class MainActivity : AppCompatActivity() {
                     //TODO 播放开始休息的音乐 通知
                     countDown(configRestTime)
                 })
+                .setCancelable(false)
 
         builder.create().show()
     }

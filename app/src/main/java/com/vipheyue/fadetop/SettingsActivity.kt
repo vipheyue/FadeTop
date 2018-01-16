@@ -92,10 +92,11 @@ class SettingsActivity : AppCompatActivity() {
         }
         btn_feedback.setOnClickListener {
             try {
-                val url = "mqqwpa://im/chat?chat_type=wpa&uin=337681920"
+                val url = "https://jq.qq.com/?_wv=1027&k=5mvN2Tr"
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                toast("请加入QQ群:469859289")
             } catch (e: Exception) {
-                toast("请直接联系 QQ:337681920")
+                toast("请加入QQ群:469859289")
             }
 
         }

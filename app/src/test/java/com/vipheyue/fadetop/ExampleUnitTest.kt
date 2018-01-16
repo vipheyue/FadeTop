@@ -12,6 +12,7 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
 
+        var name="aaa bbb ccc bbb dddd bbb cccc"
 
 
         assertEquals(4, 2 + 2)
