@@ -1,4 +1,4 @@
-package com.vipheyue.fadetop
+package com.welightworld.fadetop
 
 import android.content.Intent
 import android.graphics.Color

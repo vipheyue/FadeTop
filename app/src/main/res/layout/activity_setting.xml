@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:showDividers="middle"
 
-    tools:context="com.vipheyue.fadetop.SettingsActivity">
+    tools:context="com.welightworld.fadetop.SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

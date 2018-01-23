@@ -1,4 +1,4 @@
-package com.vipheyue.fadetop
+package com.welightworld.fadetop
 
 import android.app.Application
 import com.tencent.bugly.crashreport.CrashReport

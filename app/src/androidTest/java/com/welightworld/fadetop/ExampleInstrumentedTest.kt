@@ -1,4 +1,4 @@
-package com.vipheyue.fadetop
+package com.welightworld.fadetop
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

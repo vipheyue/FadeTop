@@ -1,4 +1,4 @@
-package com.vipheyue.fadetop
+package com.welightworld.fadetop
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
