@@ -10,8 +10,8 @@ android {
         applicationId "com.welightworld.fadetop"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -37,5 +37,5 @@ dependencies {
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
-    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
 }

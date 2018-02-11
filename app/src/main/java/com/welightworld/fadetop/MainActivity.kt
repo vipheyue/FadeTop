@@ -25,12 +25,18 @@ class MainActivity : AppCompatActivity() {
     private var havedStart = false
     var workState = WorkState.REST
     val vibTime: Long = 300 * 1000L
-    lateinit var disposable: Disposable
+    var disposable: Disposable? = null
     lateinit var vib: Vibrator
+
+    companion object {
+        lateinit var INSTANCE: MainActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//屏幕常亮
+        INSTANCE = this
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)//屏幕常亮
         Logger.addLogAdapter(AndroidLogAdapter())
         initView()
         AlarmHelper.setAlarm(this)
@@ -46,10 +52,10 @@ class MainActivity : AppCompatActivity() {
 //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 //设置状态栏颜色
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window.setStatusBarColor(configMainBgColor)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window.statusBarColor = configMainBgColor
 
-        val delegate = btn_action.getDelegate()
-        delegate.setBackgroundColor(configMainTiggerBgColor)
+        val delegate = btn_action.delegate
+        delegate.backgroundColor = configMainTiggerBgColor
 
         constraintlayout.setBackgroundColor(configMainBgColor)
         vib = getSystemService(Service.VIBRATOR_SERVICE) as Vibrator
@@ -57,18 +63,18 @@ class MainActivity : AppCompatActivity() {
         btn_action.setOnClickListener {
             if (havedStart) {//已经开始了 想停止 转换状态
                 havedStart = false
-                disposable.dispose()
+                disposable?.dispose()
                 workState = WorkState.REST
-                tv_time_panel.setText("00:00")
-                btn_action.setText("启动")//目前停止状态 点击启动
-                tv_tip.setText("休息中 健康身体 起来喝杯水吧")
+                tv_time_panel.text = "00:00"
+                btn_action.text = getString(R.string.start)//目前停止状态 点击启动
+                tv_tip.text = getString(R.string.tip_resting)
 
             } else {
                 havedStart = true
                 workState = WorkState.WORKING
                 countDown(configWorkingTime)
-                btn_action.setText("停止")//目前启动状态 点击停止
-                tv_tip.setText("工作中 稍后将提醒你 注意休息")
+                btn_action.text = getString(R.string.stop)//目前启动状态 点击停止
+                tv_tip.text = getString(R.string.tip_working)
 
             }
         }
@@ -98,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 val remainTime = count - t
                 val remainMinute = remainTime / 60
                 val remainSeconds = remainTime % 60
-                tv_time_panel.setText(remainMinute.toString() + ":" + remainSeconds)
+                tv_time_panel.text = remainMinute.toString() + ":" + remainSeconds
             }
 
             override fun onComplete() {
@@ -107,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                         //开始一直振动 并弹框 1.继续工作5分钟 2.开始休息
 //                        sendNotify("休息一下吧!")
                         if (configSuperModel) {
-                            NotifyHelper.sendNotify(this@MainActivity, "休息一下吧!",true)
+                            NotifyHelper.sendNotify(this@MainActivity, getString(R.string.tip_resting), true)
                         } else {
                             vib.vibrate(vibTime)
                         }
@@ -115,10 +121,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     WorkState.REST -> {
                         workState = WorkState.WORKING
-                        tv_tip.setText("工作中 稍后将提醒你 注意休息")
+                        tv_tip.text = getString(R.string.tip_working)
                         //TODO 播放开始工作的音乐 通知
 //                        NotifyHelper.sendNotify(MyApplication.get(),"开始工作了,老铁")
-                        NotifyHelper.sendNotify(this@MainActivity, "开始工作了,老铁")
+                        NotifyHelper.sendNotify(this@MainActivity, getString(R.string.tip_working))
                         countDown(configWorkingTime)
                     }
                 }
@@ -128,18 +134,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun chooseDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage("你已经努力工作了30分钟了,休息一下吧!")
-                .setNegativeButton("再工作5分钟", { dialog, which ->
+        builder.setMessage(getString(R.string.tip_go_rest))
+                .setNegativeButton(getString(R.string.keep_working), { dialog, which ->
                     vib.cancel()
                     NotifyHelper.cancalAll(this)
                     countDown(configRestTime)//继续工作5分钟
 
                 })
-                .setPositiveButton("立即休息", { dialog, i ->
+                .setPositiveButton(getString(R.string.rest_now), { dialog, i ->
                     vib.cancel()
                     NotifyHelper.cancalAll(this)
                     workState = WorkState.REST
-                    tv_tip.setText("休息中 健康身体 起来喝杯水吧")
+                    tv_tip.text = getString(R.string.tip_resting)
                     //TODO 播放开始休息的音乐 通知
                     countDown(configRestTime)
                 })

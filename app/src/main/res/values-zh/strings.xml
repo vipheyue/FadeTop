@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">久坐提醒</string>
+    <string name="start">启动</string>
+    <string name="stop">停止</string>
+    <string name="tip_working">工作! 工作! 工作!</string>
+    <string name="tip_resting">休息中 健康身体 起来喝杯水吧</string>
+    <string name="tip_go_rest">你已经努力工作了很久了,休息一下吧!</string>
+    <string name="keep_working">再工作5分钟</string>
+    <string name="rest_now">立即休息</string>
+    <string name="setting">设置</string>
+    <string name="minutes">分钟</string>
+    <string name="toast_supermodel">超级模式会持续响铃,必须手动点击才会停止</string>
+    <string name="set_main_bg">设置主页背景</string>
+    <string name="toast_set_success">设置成功,下次启动 APP 时生效</string>
+    <string name="set_tigger_bg">设置启动器背景</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="email">vipheyue@foxmail.com</string>
+    <string name="share">分享</string>
+    <string name="share_content">请复制以下内容到浏览器打开 \n \n http://heyue.oss-cn-hangzhou.aliyuncs.com/AppData/FadeTop/app-release.apk</string>
+    <string name="suggest">意见反馈</string>
+    <string name="tip_everyday">每日9:30分提醒</string>
+    <string name="super_model">超级模式</string>
+    <string name="work_duration">30分钟</string>
+    <string name="rest_duration">5分钟</string>
+    <string name="rest_time">休息时间</string>
+    <string name="work_time">工作时间</string>
+
+</resources>

@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Remind stand up</string>
+    <string name="start">start</string>
+    <string name="stop"> stop</string>
+    <string name="tip_working">working! working! working!</string>
+    <string name="tip_resting">Please have a rest.drink or stand up</string>
+    <string name="tip_go_rest">please have a rest!</string>
+    <string name="keep_working">Continue work 5 min</string>
+    <string name="rest_now">rest</string>
+    <string name="setting">setting</string>
+    <string name="minutes">minutes</string>
+    <string name="toast_supermodel">Super model will continue to ring, have to manually click stop</string>
+    <string name="set_main_bg">main background</string>
+    <string name="toast_set_success">Setup is successful, the next time you start the APP to take effect</string>
+    <string name="set_tigger_bg">tigger background</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="email">vipheyue@foxmail.com</string>
+    <string name="share">share</string>
+    <string name="share_content">Please copy the following content to the browser open \n  \n http://heyue.oss-cn-hangzhou.aliyuncs.com/AppData/FadeTop/app-release.apk</string>
+    <string name="suggest">suggest</string>
+    <string name="tip_everyday">tip everyday 9:30</string>
+    <string name="super_model">super model</string>
+    <string name="work_duration">30min</string>
+    <string name="rest_duration">5min</string>
+    <string name="rest_time">rest time</string>
+    <string name="work_time">work time</string>
+
 </resources>

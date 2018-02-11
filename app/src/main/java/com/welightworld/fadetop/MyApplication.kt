@@ -1,7 +1,7 @@
 package com.welightworld.fadetop
 
 import android.app.Application
-import com.tencent.bugly.crashreport.CrashReport
+import com.tencent.bugly.Bugly
 
 /**
  * Created by heyue on 2017/12/25.
@@ -11,7 +11,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         INSTANCE = this
         super.onCreate()
-        CrashReport.initCrashReport(getApplicationContext(), "3b083ab1ce", false);
+        Bugly.init(getApplicationContext(), "81a1bab3b8", false);
     }
 
     companion object {
